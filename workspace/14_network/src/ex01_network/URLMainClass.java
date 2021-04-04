@@ -1,0 +1,31 @@
+package ex01_network;
+
+import java.net.URL;
+
+public class URLMainClass {
+
+	public static void main(String[] args) {
+		
+		// URL : Uniform Resource Locator
+		// 형식이 정해져 있는 자원의 표기방법
+		// 프로토콜://호스트:포트?파라미터
+		
+		URL url1=null;
+		URL url2=null;
+		
+		try {
+			url1=new URL("http://www.naver.com/webtoon/webtoon.nhn?query=java&page=3");	
+			System.out.println(url1.getHost());
+			System.out.println(url1.getDefaultPort());
+			System.out.println(url1.getProtocol());
+			System.out.println(url1.getQuery());
+			
+			url2=new URL("http://www.naver.com/webtoon/webtoon.jps");
+			System.out.println(url2.getFile());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}
