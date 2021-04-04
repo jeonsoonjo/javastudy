@@ -1,9 +1,7 @@
 package test;
 
 import java.io.BufferedInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.BufferedOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -13,47 +11,38 @@ public class Client {
 	public static void main(String[] args) {
 		
 		Socket client=null;
-		File dir=null;
-		File file=null;
-		DataOutputStream dos=null;
-		BufferedInputStream bis=null;
 		Scanner sc=null;
+		BufferedOutputStream bos=null;
+		BufferedInputStream bis=null;
 		
 		try {
-			// client �깮�꽦 諛� �젒�냽
+			// client 생성 및 접속
 			client=new Socket();
 			client.connect(new InetSocketAddress("localhost", 4966));
 			
-			// c:\MyServer �뵒�젆�꽣由ъ뿉 �엳�뒗 �뙆�씪 以� �븯�굹�쓽 �씠由꾩쓣 �엯�젰 諛쏆븘 �뙆�씪 �쟾�넚�븯湲�
-			// �쟾�넚�븷 �뙆�씪紐� �엯�젰 諛쏄린
+			// server에게 메시지 보내기
 			sc=new Scanner(System.in);
-			System.out.println("�쟾�넚�븷 �뙆�씪紐� �엯�젰 >>> ");
-			String filename=sc.nextLine();
-			dir=new File("C:\\MyServer");
-			file=new File(dir, filename);
+			System.out.println("server에게 메시지 보내기 >>> ");
+			String msg=sc.nextLine();
+			bos=new BufferedOutputStream(client.getOutputStream());
+			bos.write(msg.getBytes("UTF-8"));
+			bos.flush();
 			
-			// server�뿉寃� �뙆�씪 �쟾�넚 以�鍮�
-			dos=new DataOutputStream(client.getOutputStream());
-			dos.writeUTF(filename);
-			
-			// �뙆�씪 �궡�슜�쓣 �씫�뼱�꽌 server�뿉寃� �뙆�씪 �쟾�넚
-			bis=new BufferedInputStream(new FileInputStream(file));
+			// server로부터 답변 메시지 받기
+			bis=new BufferedInputStream(client.getInputStream());
 			byte[] b=new byte[1024];
-			int length=0;
-			while((length=bis.read(b))!=-1) {
-				dos.write(b, 0, length);
-			}
-			System.out.println(file.getAbsolutePath()+" �뙆�씪�쓣 server濡� �쟾�넚�뻽�뒿�땲�떎");
-			
+			int length=bis.read(b);
+			String receiveMsg=new String(b, 0, length, "UTF-8");
+			System.out.println("Server : "+receiveMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(dos!=null) dos.close();
 				if(bis!=null) bis.close();
+				if(bos!=null) bos.close();
 				if(!client.isClosed()) client.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace();                      
 			}
 		}
 
