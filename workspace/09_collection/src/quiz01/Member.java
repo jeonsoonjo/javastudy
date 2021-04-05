@@ -17,8 +17,22 @@ public class Member {
 	private String mId; // 회원아이디
 	private Date mDate; // 회원가입일
 	
-	// lombok을 활용한 getter, setter, constructor 자동생성하기
-	
+	// constructor
+	public Member(int mNo, String mId, Date mDate) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mDate = mDate;
+	}
+
+	// method
+	public int getmNo() {
+		return mNo;
+	}
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
+	}
+
 	// Object클래스의 toString() 오버라이드
 	@Override
 	public String toString() {

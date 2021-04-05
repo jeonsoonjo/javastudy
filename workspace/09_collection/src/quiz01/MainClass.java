@@ -33,7 +33,7 @@ public class MainClass {
 		int length=members.size(); // size() 메소드 호출을 1번만 진행하도록 변수에 저장한다
 		for(int i=0; i<length; i++) {
 			// members.get(0)==m1 과 같다
-			if(members.get(i).getMNo()==mNo) { // 입력받은 회원번호와 일치하는지
+			if(members.get(i).getmNo()==mNo) { // 입력받은 회원번호와 일치하는지
 				removeIdx=i;
 				break;
 			}

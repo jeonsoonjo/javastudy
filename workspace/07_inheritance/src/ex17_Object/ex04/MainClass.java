@@ -1,5 +1,8 @@
 package ex17_Object.ex04;
 
+import lombok.Data;
+
+@Data
 public class MainClass {
 
 	public static void main(String[] args) {

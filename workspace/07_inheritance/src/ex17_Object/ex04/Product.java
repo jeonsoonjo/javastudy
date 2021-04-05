@@ -1,9 +1,10 @@
 package ex17_Object.ex04;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,8 +14,36 @@ public class Product {
 	private String model;
 	private String manufacturer;
 	private String date;
+	
+	// constructor
+	public Product(String model, String manufacturer, String date) {
+		super();
+		this.model = model;
+		this.manufacturer = manufacturer;
+		this.date = date;
+	}
 
 	// method
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(this==obj) { // p1.equals(p1) 무조건 같다는 의미

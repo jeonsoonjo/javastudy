@@ -33,11 +33,20 @@ public class Board {
 	private String title;
 	private String writer;
 	
+	// constructor
+	public Board(int bNo, String title, String writer) {
+		super();
+		this.bNo = bNo;
+		this.title = title;
+		this.writer = writer;
+	}
+	
 	// method
 	@Override
 	public String toString() {
 		return "[bNo=" + bNo + ", title=" + title + ", writer=" + writer + "]";
 	}
+
 
 	@Override
 	public int hashCode() {

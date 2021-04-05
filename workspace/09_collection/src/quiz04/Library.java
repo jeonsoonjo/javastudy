@@ -20,7 +20,7 @@ public class Library {
 	}
 	public void removeBook(int bNo) { // 향상 for문 사용하는 것이 쉽다
 		for(Book book:books) {
-		if(book.getBNo()==bNo) {
+		if(book.getbNo()==bNo) {
 			books.remove(book);
 			}
 		}	
